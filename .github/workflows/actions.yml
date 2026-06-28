@@ -28,3 +28,12 @@ jobs:
           API_TOKEN: ${{ secrets.SOCCERDATA_API }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: python telegram_check.py
+
+      - name: Commit file
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add latest-pre-match.txt
+          git commit -m "update file" || echo "no changes"
+          git push
