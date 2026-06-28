@@ -90,12 +90,14 @@ def write_gamesandlineups_to_file(df_pre_match): #function updates the lates-pre
         # get the first 4 columns of the first row of the dataframe (latest pre-match game) as comma separated string for the txt file
         text = ','.join(df_pre_match.iloc[n,0:4].astype(str))
 
-        if n == 0: #If n==0 that is the first game then overwrite the contents of the file from empty file, 'w': overwrite
-            with open('./betting-app/latest-pre-match.txt', 'w',encoding='utf-8') as file:
-                file.write(text +'\n'+','.join(lineup)+'\n')
-        else:      #If n!=0 that is from the second game onwards append games, 'a': append
-            with open('./betting-app/latest-pre-match.txt', 'a',encoding='utf-8') as file:
-                file.write(text +'\n'+','.join(lineup)+'\n')
+    file_path = "latest-pre-match.txt"
+
+    if n == 0:
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(text + "\n" + ",".join(lineup) + "\n")
+    else:
+        with open(file_path, "a", encoding="utf-8") as file:
+            file.write(text + "\n" + ",".join(lineup) + "\n")
 
 
 write_gamesandlineups_to_file(df_pre_match)
