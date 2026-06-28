@@ -25,5 +25,6 @@ jobs:
 
       - name: Run Telegram check + trigger script
         env:
+          API_TOKEN: ${{ secrets.SOCCERDATA_API }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: python telegram_check.py
