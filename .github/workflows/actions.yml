@@ -5,6 +5,10 @@ on:
     - cron: "*/2 * * * *"
   workflow_dispatch:
 
+# 🔐 REQUIRED for pushing files back to repo
+permissions:
+  contents: write
+
 jobs:
   check-telegram:
     runs-on: ubuntu-latest
@@ -12,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,6 +33,7 @@ jobs:
         env:
           API_TOKEN: ${{ secrets.SOCCERDATA_API }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python telegram_check.py
 
       - name: Commit file
