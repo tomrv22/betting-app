@@ -2,8 +2,9 @@ import requests
 import json
 import pandas as pd
 from datetime import datetime
+import os
 
-API_TOKEN = open('./betting-app/soccerdataapi-AUTH_TOKEN').read()
+API_TOKEN = os.environ.get("API_TOKEN")
 
 url = 'https://api.soccerdataapi.com/matches/?league_id=313&auth_token={}'.format(API_TOKEN)
 
